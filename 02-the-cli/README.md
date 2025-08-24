@@ -188,9 +188,33 @@ Might output: `/bin/ls`
 
 **Note**: `bin` stands for **binary**, a directory where runnable programs are stored.
 
-## ⚠️ Important Note about Bash History
+### `tail`
 
-Whatever you type in Bash is usually saved in a history file (commonly `~/.bash_history`). This means all your commands are recorded.
+Shows the end of a file, by default last 10 lines
+
+```bash
+tail -n 20 file.txt # Shows the last 20 lines.
+```
+
+### `tail -f`
+
+Follow mode, keeps showing new lines as they are added to the file (very useful for watching logs in real time).
+
+```bash
+tail -f file.txt # Keeps printing new lines as they are added.
+```
+
+### `head`
+
+Shows the beginning of a file, by default 10 lines
+
+```bash
+head -n 20 file.txt # Shows the first 20 lines.
+```
+
+## ⚠️ Important Note about shell History
+
+Whatever you type in your shell is usually saved in a history file (commonly `~/.bash_history` for bash). This means all your commands are recorded.
 
 - You can view them with:
 
@@ -199,6 +223,8 @@ history
 ```
 
 - Be cautious: **sensitive data** (like passwords typed directly into commands) will also be stored here unless cleared.
+
+Generally, shell history is not saved in real time. It is buffered and only written to the history file when the session ends. To manually save the current session's history to the history file, you can run the `history -a` command.
 
 ## Tab Search
 
@@ -221,6 +247,48 @@ cd Doc<Tab> # cd Documents/
 ```bash
 ls scr<Tab> # script.sh  screenshot.png  scroll.txt
 ```
+
+## Reverse Search
+
+(**cmd** + **r**) allows you to search from your shell history instead of using arrow up and down for going back in shell history.
+
+## Shortcuts
+
+- **CTRL + A** - takes you to the beginning of the line
+- **CTRL + E** - takes you to the end of the line
+- **CTRL + K** - "yank" everything after the cursor
+- **CTRL + U** - "yank" everything before the cursor
+- **CTRL + Y** - "paste" (paste in quotes because it doesn't actually go into your system clipboard) everything you yanked
+- **CTRL + L** - clear the screen
+- **CTRL + R** - reverse search through history
+
+## Signals
+
+A signal is a notification that you send to a program. It's up to the program to understand what to do with that.
+
+### CTRL + C (SIGINT)
+
+If you hit CTRL + C while a program is running, you're telling it to interrupt what it's doing and stop. You'll use this constantly. One reason is some processes are designed to never quit until you send them a SIGINT to stop. A good example of that is the `yes` command. All `yes` does is spam the string "y" until you tell it to quit. A lazy programmer wrote it so it could automatically answer "yes" to all the prompts for interactive programs. (You can also say `yes n` or `yes whatever` and it'll spam whatever you want it to.)
+
+So go type yes into your terminal. You'll find yourself with an infinite wall of ever-spamming ys in front of you. To stop it, hit CTRL + C and it'll stop immediately.
+
+### CTRL + D (SIGQUIT)
+
+Less useful but still good to know nonetheless is what CTRL + D does. Many programs won't respond to a SIGQUIT (some might, it's up to them) but bash itself will. If you're in a bash prompt and it want it to exit (like if you're remotely connected to a bash server for example), if you hit CTRL + D it'll tell the bash session to end. You also could close the window or just type `exit` and it'll exit too.
+
+Note: Try CTRL + C first if it doesn't work use CTRL + D
+
+### SIGTERM
+
+There is no shortcut for SIGTERM but I wanted to make sure you knew it existed. If I use the `kill` program to kill another program, the way it does that is by sending a SIGTERM to the program. The difference is that if the program doesn't exit, kill will still shut down the process. We'll talk later about `kill` but know it's there.
+
+### SIGKILL
+
+If you want a program to stop and stop now, you can do `kill -9` (or `kill -SIGKILL`) and it will send the SIGKILL which means to the program "don't clean up, just stop as soon as possible.) Again, we'll cover this in a bit.
+
+### More SIGNALS
+
+There are many signals and I don't know what 10% of them do. If you run `kill -l` in your terminal, it'll show you all the signals your computer supports. Most of these are used for processes to communicate amongst each other or with the shell, like SIGALRM tell your emulator to make a beep. However only really the ones above you are the ones you care about.
 
 ⸻
 
