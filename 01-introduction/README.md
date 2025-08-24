@@ -1,8 +1,8 @@
-## Complete intro to the Linux and the CLI
+# Complete intro to the Linux and the CLI
 
 This is an introduction on how to use command line and in the process we will learn linux too.
 
-### We will cover
+## What we will cover
 
 - **What is Linux?**
 - **What problems Linux solves for you?**
@@ -14,7 +14,7 @@ This is an introduction on how to use command line and in the process we will le
 
 ## What is Linux?
 
-Linux is a unix-like operating system, MacOS and FreeBSD would be tow more examples of unix-like operating system.
+Linux is a unix-like operating system, MacOS and FreeBSD would be two more examples of unix-like operating system.
 
 Unix was created in the 70s at Bell Labs. A big part of unix software is the idea of the **Unix Philosophy**. The idea is instead of having few very specialized tools (or programs) we should have many small composable tools that we can use to compose to solve larger problems.
 
